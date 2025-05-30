@@ -161,21 +161,21 @@ realTimeServer(httpServer);
 Imagenes de ejecucion:
 Ejecicucion del programa y como se conectan los usuarios al mismo
 
-![Ejecucion](src/public/img/iniciarServe.png)
+  ![Ejecucion](src/public/img/iniciarServe.png)
 
 Registro de usarios:
 
-![Registo](src/public/img/registroUser.png)
+  ![Registo](src/public/img/registroUser.png)
 
 Pantalla principal con el chat y usuarios activos:
 
-![Pantalla principal](src/public/img/accesoNav.png)
-![Pantalla principal](src/public/img/chatTR.png)
+  ![Pantalla principal](src/public/img/accesoNav.png)
+  ![Pantalla principal](src/public/img/chatTR.png)
 
 Pantalla principal con el chat de usarios activos y desactivos:
 
-![Pantalla principal](src/public/img/userOff.png)
-![Terminal de ejecucion](src/public/img/userOffServe.png)
+  ![Pantalla principal](src/public/img/userOff.png)
+  ![Terminal de ejecucion](src/public/img/userOffServe.png)
 
 ### Instrucciones de Ejecución:
 
