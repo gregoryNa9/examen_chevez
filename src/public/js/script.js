@@ -15,30 +15,93 @@ const send = document.querySelector("#send-message");
 const allMessages = document.querySelector("#all-messages");
 
 send.addEventListener("click", () => {
-  const message = document.querySelector("#message").value;
-  if (message.trim()) {
+  const message = document.querySelector("#message").value.trim();
+  if (message) {
     socket.emit("message", { user: username, message });
     document.querySelector("#message").value = "";
   }
 });
 
 socket.on("message", ({ user, message }) => {
-  const msg = document.createRange().createContextualFragment(`
-    <style>
-    .text-muted-white {
-      color: white !important;
-    }
-    </style>
-    <div class="message d-flex align-items-start">
-      <img src="/img/Foto.jpg" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
-      <div>
-        <div class="user-info d-flex align-items-center mb-1">
-          <span class="fw-bold me-2">${user}</span>
-          <span class="text-muted-white small">Hace 1 minuto</span>
-        </div>
-        <p class="mb-0">${message}</p>
-      </div>
+  const isOwn = user === username;
+  const msgDiv = document.createElement("div");
+  msgDiv.classList.add("d-flex", "mb-3");
+
+  // Alineación según usuario
+  if (isOwn) {
+    msgDiv.classList.add("justify-content-end");
+  } else {
+    msgDiv.classList.add("justify-content-start");
+  }
+
+  msgDiv.innerHTML = `
+    <div class="message-bubble p-3 rounded" style="
+      max-width: 60%;
+      background-color: ${isOwn ? '#a3c4f3' : '#2a2a2a'};
+      color: ${isOwn ? 'black' : 'white'};
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      ">
+      <div class="fw-bold mb-1">${user}</div>
+      <div>${escapeHtml(message)}</div>
     </div>
-  `);
-  allMessages.append(msg);
+  `;
+
+  allMessages.appendChild(msgDiv);
+  allMessages.scrollTop = allMessages.scrollHeight;
 });
+
+socket.emit("new-user", username);
+
+socket.on("user-list", (users) => {
+  const usersContainer = document.getElementById("users-container");
+  if (!usersContainer) return;
+
+  usersContainer.innerHTML = '';
+
+  users.forEach(({ user, connected }) => {
+    const userDiv = document.createElement("div");
+    userDiv.textContent = user;
+
+    // Color verde si activo, rojo si desconectado
+    userDiv.style.color = connected ? "#28a745" : "#dc3545";
+    userDiv.style.fontWeight = connected ? "bold" : "normal";
+    userDiv.classList.add("mb-2");
+
+    // Indicador pequeño al lado del nombre
+    const statusDot = document.createElement("span");
+    statusDot.style.width = "10px";
+    statusDot.style.height = "10px";
+    statusDot.style.borderRadius = "50%";
+    statusDot.style.display = "inline-block";
+    statusDot.style.marginLeft = "8px";
+    statusDot.style.backgroundColor = connected ? "#28a745" : "#dc3545";
+    userDiv.appendChild(statusDot);
+
+    usersContainer.appendChild(userDiv);
+  });
+});
+
+// Tema toggle (igual que antes)
+const toggleThemeBtn = document.getElementById("toggle-theme");
+if (toggleThemeBtn) {
+  toggleThemeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    location.reload();
+  });
+}
+
+window.addEventListener("load", () => {
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+});
+
+// Función para evitar inyección HTML en mensajes
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
