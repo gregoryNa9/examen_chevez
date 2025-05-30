@@ -178,7 +178,7 @@ Pantalla principal con el chat de usarios activos y desactivos:
 ```
 
 ### Instrucciones de Ejecución:
-```
+
 Clonar el repositorio:
 
 git clone https://github.com/gregoryNa9/examen_chevez.git
@@ -195,10 +195,10 @@ Abrir el navegador y acceder a:
 
 http://localhost:3000
 
-```
+
 
 ### Conclusiones:
-```
+
 Este proyecto, desarrollado como parte de un examen práctico, me permitió aplicar los conocimientos adquiridos sobre comunicación en tiempo real mediante el uso de Socket.IO. A lo largo del proceso, comprendí en profundidad el ciclo de vida de un socket y la importancia de gestionar adecuadamente el estado de múltiples usuarios conectados.
 
 Entre las principales dificultades encontradas se destacan:
@@ -208,10 +208,12 @@ La sincronización precisa del estado de los usuarios al momento de desconectars
 La visualización dinámica, organizada y clara de los mensajes dentro de la interfaz del chat.
 
 Estas problemáticas fueron abordadas mediante estructuras de datos adecuadas para distinguir usuarios activos e inactivos, así como mediante la emisión de eventos personalizados que garantizan una actualización en tiempo real del estado general del sistema.
-```
+
 
 ### Referencias:
-```
+Socket.IO – Official Documentation: 
 https://socket.io/docs/v4/
+
+Bootstrap 5 – Official Documentation: 
 https://getbootstrap.com/
-```
+
