@@ -177,7 +177,6 @@ Pantalla principal con el chat de usarios activos y desactivos:
 ![Pantalla principal](src/public/img/userOff.png)
 ![Terminal de ejecucion](src/public/img/userOffServe.png)
 
-
 ### Instrucciones de Ejecución:
 
 Clonar el repositorio:
