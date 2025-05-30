@@ -157,7 +157,8 @@ realTimeServer(httpServer);
 
 
 ### Capturas de Pantalla
-```Imagenes de ejecucion:
+
+Imagenes de ejecucion:
 Ejecicucion del programa y como se conectan los usuarios al mismo
 
 ![Ejecucion](src/public/img/iniciarServe.png)
@@ -175,7 +176,7 @@ Pantalla principal con el chat de usarios activos y desactivos:
 
 ![Pantalla principal](src/public/img/userOff.png)
 ![Terminal de ejecucion](src/public/img/userOffServe.png)
-```
+
 
 ### Instrucciones de Ejecución:
 
